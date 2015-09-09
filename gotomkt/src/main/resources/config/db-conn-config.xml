@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.gotomkt.svc.services" />
+	<mongo:repositories base-package="com.gotomkt.svc.services" mongo-template-ref="mongoTemplate"/>
+
+	<!-- <mongo:mongo host="alfurdapp-dev-001" port="27017" id="mango" /> <mongo:db-factory 
+		mongo-ref="mongo" dbname="gotomkt" id="mongoDbFactory" /> -->
+
+	<!-- <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean"> 
+		<property name="host" value="alfurdapp-dev-001" /> </bean> -->
+
+	<!-- <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"> 
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" /> </bean> -->
+
+	<mongo:db-factory id="mongoDbFactory" host="alfurdapp-dev-001"
+		port="27017" dbname="gotomkt" />
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+	</bean>
+</beans>
